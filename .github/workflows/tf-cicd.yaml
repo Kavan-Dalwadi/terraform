@@ -15,9 +15,9 @@ jobs:
     - name: Validate
       run: terraform validate 
     - name: Plan
-      run: terraform plan
+      run: terraform plan -var-file="demo.tfvars"
     - name: Apply
-      run: terraform apply
+      run: terraform apply -var-file="demo.tfvars"
 
 
 #   Validation:
