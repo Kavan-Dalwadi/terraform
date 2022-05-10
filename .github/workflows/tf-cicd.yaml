@@ -10,12 +10,14 @@ jobs:
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v3
+    - name: Init
       run: terraform init
 
   Validation:
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v3
+    - name: Validate
       run: terraform validate
 
 
@@ -23,10 +25,12 @@ jobs:
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v3
+    - name: Plan
       run: terraform plan
 
   Deploy:
     runs-on: self-hosted
     steps:
     - uses: actions/checkout@v3
+    - name: Apply
       run: terraform apply
