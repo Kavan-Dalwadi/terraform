@@ -12,28 +12,31 @@ jobs:
     - uses: actions/checkout@v3
     - name: Init
       run: terraform init
-
-  Validation:
-    needs: Initialise
-    runs-on: self-hosted
-    steps:
-    - uses: actions/checkout@v3
     - name: Validate
-      run: terraform validate
-
-
-  Plan:
-    needs: Validation
-    runs-on: self-hosted
-    steps:
-    - uses: actions/checkout@v3
+      run: terraform validate 
     - name: Plan
       run: terraform plan
-
-  Deploy:
-    needs: Plan
-    runs-on: self-hosted
-    steps:
-    - uses: actions/checkout@v3
     - name: Apply
       run: terraform apply
+
+
+#   Validation:
+#     needs: Initialise
+#     runs-on: self-hosted
+#     steps:
+#     - uses: actions/checkout@v3
+    
+
+
+#   Plan:
+#     needs: Validation
+#     runs-on: self-hosted
+#     steps:
+#     - uses: actions/checkout@v3
+    
+
+#   Deploy:
+#     needs: Plan
+#     runs-on: self-hosted
+#     steps:
+#     - uses: actions/checkout@v3
