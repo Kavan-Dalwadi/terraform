@@ -1,9 +1,12 @@
 terraform {
   required_version = ">= 0.12"
-  backend "s3" {
-    bucket = "terraform-backup-18ce015"
-    key    = "development/terraform.tfstate"
-    region = "ap-south-1"
+  backend "local" {
+      path = "./terraform.tfstate"
+
+//    for backend "s3"    
+//    bucket = "terraform-backup-18ce015"
+//    key    = "development/terraform.tfstate"
+//    region = "ap-south-1"
   }
 }
 

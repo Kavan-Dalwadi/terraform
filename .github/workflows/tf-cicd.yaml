@@ -1,8 +1,8 @@
 name: tf dynamic module cicd
 
 on:
-  push:
-    branches: [dev , master]
+#  push:
+#    branches: [dev , master]
 
 jobs:
 
