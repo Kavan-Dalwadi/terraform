@@ -29,6 +29,13 @@ variable "public_key_path" {
 variable "key_name" {
   description = "Desired name of AWS key pair"
   type = string
+  default = "tf_aws_keypair"
+}
+
+variable "instance_type" {
+  description = "AWS EC2 instance type"
+  type = string
+  default = "t2.micro"
 }
 
 variable "aws_amis" {
