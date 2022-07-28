@@ -18,13 +18,13 @@ variable "vpc_cidr" {
 variable "public_subnet_cidr" {
   description = "VPC Subnet Public  CIDR"
   type = string
-  default = "10.0.0.0/24"
+  default = "10.0.16.0/24"
 }
 
 variable "private_subnet_cidr" {
   description = "VPC Subnet Private  CIDR"
   type = string
-  default = "10.0.16.0/24"
+  default = "10.0.0.0/24"
 }
    
 variable "public_key_path" {
