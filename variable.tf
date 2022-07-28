@@ -39,7 +39,7 @@ variable "key_name" {
 }
 
 variable "instance_type" {
-  description = "AWS EC2 instance type"
+  description = "AWS EC2 instance type DEV"
   type = string
   default = "t2.micro"
 }
