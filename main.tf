@@ -22,17 +22,17 @@ module "vpc" {
   env = var.env
 }
 
-module "ec2" {
-  source = "./module/ec2"
-  public_key_path = var.public_key_path
-  key_name = var.key_name
-  instance_type = var.instance_type
-  env = var.env
-  ami = var.aws_amis[var.aws_region]
-  vpc_security_group_id = module.vpc.vpc_security_group_id
-  vpc_subnet_id = module.vpc.vpc_public_subnet_id
+# module "ec2" {
+#   source = "./module/ec2"
+#   public_key_path = var.public_key_path
+#   key_name = var.key_name
+#   instance_type = var.instance_type
+#   env = var.env
+#   ami = var.aws_amis[var.aws_region]
+#   vpc_security_group_id = module.vpc.vpc_security_group_id
+#   vpc_subnet_id = module.vpc.vpc_public_subnet_id
 
-  depends_on = [
-    module.vpc
-  ]
-}
+#   depends_on = [
+#     module.vpc
+#   ]
+# }
