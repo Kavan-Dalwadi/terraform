@@ -1,0 +1,27 @@
+variable "env" {
+    description = "Project environment"
+    type = string
+}
+
+variable "vpc_cidr" {
+  description = "VPC CIDR"
+  type = string
+}
+
+variable "subnetA_cidr" {
+  description = "VPC Subnet A  CIDR" 
+  type = string
+}
+
+variable "subnetB_cidr" {
+  description = "VPC Subnet A  CIDR" 
+  type = string
+}
+
+variable "az_1" {
+  description = "Your Az1, use AWS CLI to find your account specific"
+}
+
+variable "az_2" {
+  description = "Your Az2, use AWS CLI to find your account specific"
+}

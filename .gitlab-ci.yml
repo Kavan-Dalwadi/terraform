@@ -1,0 +1,33 @@
+stages:
+    - build
+    - validate
+    - test
+    - deploy
+    - destroy
+
+Init:
+    tags:
+        - self-hosted
+    stage: build
+    script:
+        - terraform init
+        - terraform validate
+        - terraform plan -var-file="demo.tfvars"
+
+Deploy:
+    tags:
+        - self-hosted
+    stage: deploy
+    script:
+        - terraform init
+        - terraform apply -auto-approve -var-file="demo.tfvars"
+    when: manual
+
+Destroy:
+    tags:
+        - self-hosted
+    stage: destroy
+    script:
+        - terraform init
+        - terraform destroy -auto-approve
+    when: manual
