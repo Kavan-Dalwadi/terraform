@@ -8,6 +8,11 @@ variable "key_name" {
     description = "ec2 key name"
 }
 
+variable "instance_type" {
+  description = "AWS EC2 instance type"
+  type = string
+}
+
 variable "public_key_path" {
     type = string
     description = "ec2 public key path"

@@ -8,12 +8,12 @@ variable "vpc_cidr" {
   type = string
 }
 
-variable "subnetA_cidr" {
+variable "public_subnet_cidr" {
   description = "VPC Subnet A  CIDR" 
   type = string
 }
 
-variable "subnetB_cidr" {
+variable "private_subnet_cidr" {
   description = "VPC Subnet A  CIDR" 
   type = string
 }

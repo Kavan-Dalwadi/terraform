@@ -16,8 +16,8 @@ provider "aws" {
 module "vpc" {
   source = "./module/vpc"
   vpc_cidr = var.vpc_cidr
-  subnetA_cidr = var.subnetA_cidr
-  subnetB_cidr = var.subnetB_cidr
+  public_subnet_cidr = var.public_subnet_cidr
+  private_subnet_cidr = var.private_subnet_cidr
   az_1 = var.az_1
   az_2 = var.az_2
   env = var.env
@@ -27,10 +27,11 @@ module "ec2" {
   source = "./module/ec2"
   public_key_path = var.public_key_path
   key_name = var.key_name
+  instance_type = var.instance_type
   env = var.env
   ami = var.aws_amis[var.aws_region]
   vpc_security_group_id = module.vpc.vpc_security_group_id
-  vpc_subnet_id = module.vpc.vpc_subnet_id
+  vpc_subnet_id = module.vpc.vpc_public_subnet_id
 
   depends_on = [
     module.vpc
@@ -42,7 +43,7 @@ module "elb" {
 
   env = var.env
   vpc_id = module.vpc.vpc_id
-  vpc_subnet_id = module.vpc.vpc_subnet_id
+  vpc_subnet_id = module.vpc.vpc_public_subnet_id
   aws_instance_web_id = module.ec2.aws_instance_web_id
 
   depends_on = [
@@ -63,8 +64,8 @@ module "rds" {
   password               = var.password
 
   vpc_security_group_id = module.vpc.vpc_security_group_id
-  vpc_subnet_id = module.vpc.vpc_subnet_id
-  vpc_subnet_two_id = module.vpc.vpc_subnet_two_id
+  vpc_subnet_id = module.vpc.vpc_public_subnet_id
+  vpc_subnet_two_id = module.vpc.vpc_private_subnet_id
 
   depends_on = [
     module.vpc

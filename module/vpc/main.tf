@@ -20,25 +20,25 @@ resource "aws_route" "internet_access" {
     gateway_id             = aws_internet_gateway.default.id
 }
 
-resource "aws_subnet" "default" {
+resource "aws_subnet" "public" {
     vpc_id                  = aws_vpc.default.id
-    cidr_block              = var.subnetA_cidr
+    cidr_block              = var.public_subnet_cidr
     map_public_ip_on_launch = true
     availability_zone = var.az_1
 
     tags = {
-      "Name" = "${var.env}-subnet-A"
+      "Name" = "${var.env}-public-subnet"
     }
 }
 
-resource "aws_subnet" "default_two" {
+resource "aws_subnet" "private" {
     vpc_id                  = aws_vpc.default.id
-    cidr_block              = var.subnetB_cidr
-    map_public_ip_on_launch = true
+    cidr_block              = var.private_subnet_cidr
+    map_public_ip_on_launch = false
     availability_zone = var.az_2
 
     tags = {
-      "Name" = "${var.env}-subnet-B"
+      "Name" = "${var.env}-private-subnet"
     }
 }
 

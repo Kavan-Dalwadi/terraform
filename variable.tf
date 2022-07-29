@@ -15,16 +15,16 @@ variable "vpc_cidr" {
   default = "10.0.0.0/16"
 }
 
-variable "subnetA_cidr" {
+variable "public_subnet_cidr" {
   description = "VPC Subnet A  CIDR"
   type = string
-  default = "10.0.1.0/24"
+  default = "10.0.16.0/24"
 }
 
-variable "subnetB_cidr" {
+variable "private_subnet_cidr" {
   description = "VPC Subnet B  CIDR"
   type = string
-  default = "10.0.2.0/24"
+  default = "10.0.0.0/24"
 } 
 
 variable "az_1" {
@@ -40,6 +40,12 @@ variable "az_2" {
 variable "public_key_path" {
   description = "SSh public key path"
   default = "~/.ssh/tf_aws_keypair.pub"
+}
+
+variable "instance_type" {
+  description = "AWS EC2 instance type"
+  type = string
+  default = "t2.micro"
 }
 
 variable "key_name" {
