@@ -5,31 +5,47 @@ variable "aws_region" {
 }
 
 variable "env" {
-    description = "Project environment "
-    default = "development"
+    description = "Project environment.. "
+    default = "prod"
 }
 
 variable "vpc_cidr" {
-  description = "VPC CIDR"
+  description = "VPC CIDR.."
   type = string
   default = "10.0.0.0/16"
 }
 
 variable "public_subnet_cidr" {
-  description = "VPC Subnet Public  CIDR"
+  description = "VPC Subnet A  CIDR"
   type = string
   default = "10.0.16.0/24"
 }
 
 variable "private_subnet_cidr" {
-  description = "VPC Subnet Private  CIDR"
+  description = "VPC Subnet B  CIDR"
   type = string
   default = "10.0.0.0/24"
+} 
+
+variable "az_1" {
+  default     = "ap-south-1b"
+  description = "Your Az1, use AWS CLI to find your account specific"
 }
-   
+
+variable "az_2" {
+  default     = "ap-south-1c"
+  description = "Your Az2, use AWS CLI to find your account specific"
+}
+
 variable "public_key_path" {
   description = "SSh public key path"
   default = "~/.ssh/tf_aws_keypair.pub"
+}
+
+variable "instance_type" {
+  description = "AWS EC2 instance type"
+  type = string
+  default = "t2.micro"
 }
 
 variable "key_name" {
@@ -38,14 +54,41 @@ variable "key_name" {
   default = "tf_aws_keypair"
 }
 
-variable "instance_type" {
-  description = "AWS EC2 instance type DEV"
-  type = string
-  default = "t2.micro"
-}
-
 variable "aws_amis" {
   default = {
     ap-south-1 = "ami-0756a1c858554433e"
   }
+}
+
+
+variable "allocated_storage" {
+  default = "10"
+  description = "Storage size in GB"
+}
+
+variable "engine" {
+  default     = "mysql"
+  description = "Engine type, example values mysql, postgres"
+}
+
+variable "engine_version" {
+  description = "Engine version"
+  default = {
+    mysql    = "5.7.21"
+  }
+}
+
+variable "instance_class" {
+  default     = "db.t2.micro"
+  description = "Instance class"
+}
+
+
+variable "username" {
+  default     = "myuser"
+  description = "User name"
+}
+
+variable "password" {
+  description = "password, provide through your ENV variables"
 }
