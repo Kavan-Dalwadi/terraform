@@ -29,12 +29,12 @@ variable "private_subnet_cidr" {
 
 variable "az_1" {
   default     = "ap-south-1b"
-  description = "Your Az1, use AWS CLI to find your account specific"
+  description = "Your AZ1, use AWS CLI to find your account specific"
 }
 
 variable "az_2" {
   default     = "ap-south-1c"
-  description = "Your Az2, use AWS CLI to find your account specific"
+  description = "Your AZ2, use AWS CLI to find your account specific"
 }
 
 variable "public_key_path" {
