@@ -42,6 +42,23 @@ resource "aws_subnet" "private" {
     }
 }
 
+resource "aws_eip" "default" {
+   vpc   = true
+
+    tags = {
+      "Name" = "${var.env}-ElasticIP"
+    }
+ }
+
+resource "aws_nat_gateway" "default" {
+  allocation_id = aws_eip.default.id
+  subnet_id = aws_subnet.public.id
+  
+    tags = {
+      "Name" = "${var.env}-NAT-Gateway"
+    }
+}
+
 resource "aws_security_group" "default" {
     name        = "${var.env}-terraform_example"
     description = "Used in the terraform"
