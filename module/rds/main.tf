@@ -11,6 +11,6 @@ resource "aws_db_instance" "default" {
 }
 
 resource "aws_db_subnet_group" "default" {
-  name        = "${var.env}-db-sg"
+  name        = "${var.env}-tf-db-sg"
   subnet_ids  = [var.vpc_subnet_id,var.vpc_subnet_two_id]
 }

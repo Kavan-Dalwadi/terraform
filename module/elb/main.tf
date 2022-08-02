@@ -1,5 +1,5 @@
 resource "aws_security_group" "elb" {
-  name        = "${var.env}-elb-sg"
+  name        = "${var.env}-tf-elb-sg"
   vpc_id      = var.vpc_id
 
   ingress {
@@ -19,7 +19,7 @@ resource "aws_security_group" "elb" {
 }
 
 resource "aws_elb" "web" {
-  name = "${var.env}-elb"
+  name = "${var.env}-tf-elb"
 
   subnets         = [var.vpc_subnet_id]
   security_groups = [aws_security_group.elb.id]
