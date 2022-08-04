@@ -92,3 +92,14 @@ variable "username" {
 variable "password" {
   description = "password, provide through your ENV variables"
 }
+
+variable "cluster_config" {
+  type = object({
+    name    = string
+    version = string
+  })
+  default = {
+    name    = "eks-cluster"
+    version = "1.22"
+  }
+}

@@ -71,3 +71,22 @@ module "rds" {
     module.vpc
   ]  
 }
+
+module "iam" {
+  source = "./modules/iam"
+  #eks-role-policy = var.aws_iam_role_policy_attachment
+}
+
+module "eks_cluster" {
+  source = "./modules/eks_cluster"
+  cluster_config = var.cluster_config
+  role_arn = module.iam.EKSClusterRole
+  public_subnets_id = module.vpc.vpc_public_subnet_id
+  private_subnets_id = module.vpc.vpc_private_subnet_id
+  security_group_id = module.vpc.vpc_security_group_id
+  node_role_arn = module.iam.NodeGroupRole
+
+  depends_on = [
+    module.vpc 
+  ]
+}

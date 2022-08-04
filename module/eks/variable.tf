@@ -1,12 +1,5 @@
 variable "cluster_config" {
-  type = object({
-    name    = string
-    version = string
-  })
-  default = {
-    name    = "eks-cluster"
-    version = "1.22"
-  }
+  
 }
 
 variable "role_arn" {
