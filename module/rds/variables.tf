@@ -26,7 +26,7 @@ variable "username" {
 }
 
 variable "password" {
-  description = "password, provide through your ENV variable"
+  description = "password, provide through your ENV variables"
 }
 
 variable "vpc_security_group_id" {

@@ -29,7 +29,6 @@ module "ec2" {
   key_name = var.key_name
   instance_type = var.instance_type
   env = var.env
-  
   ami = var.aws_amis[var.aws_region]
   vpc_security_group_id = module.vpc.vpc_security_group_id
   vpc_subnet_id = module.vpc.vpc_public_subnet_id
@@ -41,6 +40,7 @@ module "ec2" {
 
 module "elb" {
   source = "./module/elb"
+
   env = var.env
   vpc_id = module.vpc.vpc_id
   vpc_subnet_id = module.vpc.vpc_public_subnet_id
@@ -60,7 +60,6 @@ module "rds" {
   engine                 = var.engine
   engine_version         = var.engine_version[var.engine]
   instance_class         = var.instance_class
-  
   username               = var.username
   password               = var.password
 

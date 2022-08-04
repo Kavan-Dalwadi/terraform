@@ -14,7 +14,6 @@ resource "aws_instance" "web" {
     tags = {
       "Name" = "${var.env}-tf-server"
     }
-    
 }
 
 # resource "aws_ami_from_instance" "web" {
