@@ -12,19 +12,19 @@ variable "env" {
 variable "vpc_cidr" {
   description = "VPC CIDR.."
   type = string
-  default = "10.0.0.0/16"
+  default = "114.0.0.0/16"
 }
 
 variable "public_subnet_cidr" {
   description = "VPC Subnet A  CIDR"
   type = string
-  default = "10.0.16.0/24"
+  default = "114.0.16.0/24"
 }
 
 variable "private_subnet_cidr" {
   description = "VPC Subnet B  CIDR"
   type = string
-  default = "10.0.0.0/24"
+  default = "114.0.0.0/24"
 } 
 
 variable "az_1" {
@@ -67,19 +67,18 @@ variable "allocated_storage" {
 }
 
 variable "engine" {
-  default     = "mysql"
-  description = "Engine type, example values mysql, postgres"
+  default     = "aurora-mysql"
+  description = "Engine type, example values mysql, postgres, aurora-mysql"
 }
 
 variable "engine_version" {
   description = "Engine version"
-  default = {
-    mysql    = "5.7.21"
-  }
+  type = string
+  default = "2.10.2"
 }
 
 variable "instance_class" {
-  default     = "db.t2.micro"
+  default     = "db.t2.small"
   description = "Instance class"
 }
 
