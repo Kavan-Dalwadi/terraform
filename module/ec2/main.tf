@@ -11,6 +11,11 @@ resource "aws_instance" "web" {
     vpc_security_group_ids = [var.ec2_security_group_id]
     subnet_id = var.vpc_subnet_id
 
+    user_data = <<EOF
+#!/bin/bash
+echo "Hello"
+EOF
+
     tags = {
       "Name" = "${var.env}-tf-server"
     }
