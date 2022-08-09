@@ -30,7 +30,7 @@ module "vpc" {
 #   instance_type = var.instance_type
 #   env = var.env
 #   ami = var.aws_amis[var.aws_region]
-#   vpc_security_group_id = module.vpc.vpc_security_group_id
+#   ec2_security_group_id = module.vpc.vpc_ec2_security_group_id
 #   vpc_subnet_id = module.vpc.vpc_public_subnet_id
 
 #   depends_on = [
@@ -63,9 +63,17 @@ module "rds" {
   username               = var.username
   password               = var.password
 
-  vpc_security_group_id = module.vpc.vpc_security_group_id
+  rds_security_group_id = module.vpc.vpc_rds_security_group_id
   vpc_subnet_id = module.vpc.vpc_public_subnet_id
   vpc_subnet_two_id = module.vpc.vpc_private_subnet_id
+
+  rds_cluster_name = var.rds_cluster_name
+  rds_cluster_engine = var.rds_cluster_engine
+  rds_cluster_engine_version = var.rds_cluster_engine_version
+  rds_cluster_instance_class = var.rds_cluster_instance_class
+  rds_cluster_identifier = var.rds_cluster_identifier
+  rds_cluster_username = var.rds_cluster_username
+  rds_cluster_password = var.rds_cluster_password
 
   depends_on = [
     module.vpc
@@ -83,7 +91,7 @@ module "rds" {
 #   role_arn = module.iam.EKSClusterRole
 #   public_subnets_id = module.vpc.vpc_public_subnet_id
 #   private_subnets_id = module.vpc.vpc_private_subnet_id
-#   security_group_id = module.vpc.vpc_security_group_id
+#   security_group_id = module.vpc.vpc_ec2_security_group_id
 #   node_role_arn = module.iam.NodeGroupRole
 
 #   depends_on = [

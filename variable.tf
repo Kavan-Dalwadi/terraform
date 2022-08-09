@@ -62,19 +62,20 @@ variable "aws_amis" {
 
 
 variable "allocated_storage" {
-  default = "10"
+  default = 40
+  type = number
   description = "Storage size in GB"
 }
 
 variable "engine" {
-  default     = "aurora-mysql"
+  default     = "aurora"
   description = "Engine type, example values mysql, postgres, aurora-mysql"
 }
 
 variable "engine_version" {
   description = "Engine version"
+  default = "5.7.12"
   type = string
-  default = "2.10.2"
 }
 
 variable "instance_class" {
@@ -101,4 +102,40 @@ variable "cluster_config" {
     name    = "eks-cluster"
     version = "1.22"
   }
+}
+
+variable "rds_cluster_name" {
+  default     = "auroraMySQL"
+  description = "RDS name"
+}
+
+variable "rds_cluster_identifier" {
+  default     = "aurora-cluster-demo"
+  description = "Engine type, example values mysql, postgres, aurora-mysql"
+}
+
+variable "rds_cluster_engine" {
+  default     = "aurora-mysql"
+  description = "Engine type, example values mysql, postgres, aurora-mysql"
+}
+
+variable "rds_cluster_engine_version" {
+  description = "Engine version"
+  default = "5.7.mysql_aurora.2.10.2"
+  type = string
+}
+
+variable "rds_cluster_instance_class" {
+  default     = "db.t2.small"
+  description = "Instance class"
+}
+
+
+variable "rds_cluster_username" {
+  default     = "myuser"
+  description = "User name"
+}
+
+variable "rds_cluster_password" {
+  description = "password, provide through your ENV variables"
 }

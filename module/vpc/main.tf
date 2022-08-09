@@ -59,8 +59,8 @@ resource "aws_nat_gateway" "default" {
     }
 }
 
-resource "aws_security_group" "default" {
-    name        = "${var.env}-tf-terraform_example"
+resource "aws_security_group" "default_ec2" {
+    name        = "${var.env}-tf-ec2"
     description = "Used in the terraform"
     vpc_id      = aws_vpc.default.id
 
@@ -77,6 +77,32 @@ resource "aws_security_group" "default" {
       to_port     = 80
       protocol    = "tcp"
       cidr_blocks = ["0.0.0.0/16"]
+    }
+
+    egress {
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
+
+    tags = {
+      "Name" = "${var.env}-tf-sg"
+    }
+}
+
+
+resource "aws_security_group" "default_rds" {
+    name        = "${var.env}-tf-rds"
+    description = "Used in the terraform"
+    vpc_id      = aws_vpc.default.id
+
+
+    ingress {
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      security_groups = [ aws_security_group.default_ec2.id ]
     }
 
     egress {
