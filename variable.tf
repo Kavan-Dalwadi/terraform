@@ -12,19 +12,19 @@ variable "env" {
 variable "vpc_cidr" {
   description = "VPC CIDR.."
   type = string
-  default = "10.0.0.0/16"
+  default = "114.0.0.0/16"
 }
 
 variable "public_subnet_cidr" {
   description = "VPC Subnet A  CIDR"
   type = string
-  default = "10.0.16.0/24"
+  default = "114.0.16.0/24"
 }
 
 variable "private_subnet_cidr" {
   description = "VPC Subnet B  CIDR"
   type = string
-  default = "10.0.0.0/24"
+  default = "114.0.0.0/24"
 } 
 
 variable "az_1" {
@@ -62,24 +62,24 @@ variable "aws_amis" {
 
 
 variable "allocated_storage" {
-  default = "10"
+  default = 40
+  type = number
   description = "Storage size in GB"
 }
 
 variable "engine" {
-  default     = "mysql"
-  description = "Engine type, example values mysql, postgres"
+  default     = "aurora"
+  description = "Engine type, example values mysql, postgres, aurora-mysql"
 }
 
 variable "engine_version" {
   description = "Engine version"
-  default = {
-    mysql    = "5.7.21"
-  }
+  default = "5.7.12"
+  type = string
 }
 
 variable "instance_class" {
-  default     = "db.t2.micro"
+  default     = "db.t2.small"
   description = "Instance class"
 }
 
@@ -90,5 +90,52 @@ variable "username" {
 }
 
 variable "password" {
+  description = "password, provide through your ENV variables"
+}
+
+variable "cluster_config" {
+  type = object({
+    name    = string
+    version = string
+  })
+  default = {
+    name    = "eks-cluster"
+    version = "1.22"
+  }
+}
+
+variable "rds_cluster_name" {
+  default     = "auroraMySQL"
+  description = "RDS name"
+}
+
+variable "rds_cluster_identifier" {
+  default     = "aurora-cluster-demo"
+  description = "Engine type, example values mysql, postgres, aurora-mysql"
+}
+
+variable "rds_cluster_engine" {
+  default     = "aurora-mysql"
+  description = "Engine type, example values mysql, postgres, aurora-mysql"
+}
+
+variable "rds_cluster_engine_version" {
+  description = "Engine version"
+  default = "5.7.mysql_aurora.2.10.2"
+  type = string
+}
+
+variable "rds_cluster_instance_class" {
+  default     = "db.t2.small"
+  description = "Instance class"
+}
+
+
+variable "rds_cluster_username" {
+  default     = "myuser"
+  description = "User name"
+}
+
+variable "rds_cluster_password" {
   description = "password, provide through your ENV variables"
 }

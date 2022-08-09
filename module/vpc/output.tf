@@ -11,6 +11,10 @@ output "vpc_private_subnet_id" {
     value = aws_subnet.private.id
 }
 
-output "vpc_security_group_id" {
-    value = aws_security_group.default.id
+output "vpc_ec2_security_group_id" {
+    value = aws_security_group.default_ec2.id
+}
+
+output "vpc_rds_security_group_id" {
+    value = aws_security_group.default_rds.id
 }

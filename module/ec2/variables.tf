@@ -23,7 +23,7 @@ variable "ami" {
     description = "ec2 ami"
 }
 
-variable "vpc_security_group_id" {
+variable "ec2_security_group_id" {
     type = string
     description = "vpc deafault security group id"
 }
