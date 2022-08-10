@@ -1,9 +1,9 @@
 resource "aws_lambda_function" "lambda" {
-  filename      = "lambda.zip"
-  function_name = "mylambda"
+  filename      = var.filename
+  function_name = var.function_name
   role          = var.lambdaRole.arn
-  handler       = "lambda.lambda_handler"
-  runtime       = "python3.7"
+  handler       = var.handler
+  runtime       = var.runtime
 
   source_code_hash = filebase64sha256("lambda.zip")
 }
