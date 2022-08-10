@@ -139,3 +139,89 @@ variable "rds_cluster_username" {
 variable "rds_cluster_password" {
   description = "password, provide through your ENV variables"
 }
+
+# For Lambda and API Gateway Integration
+
+variable "accountId" {
+  description = "AWS Account ID"
+}
+
+variable "lambda_role_name" {
+  description = "Lambda IAM Role Name"
+  default = "lambdaRole"
+}
+
+variable "filename" {
+  description = "lambda function file name"
+  default = "lambda.zip"
+  type = string
+}
+
+variable "function_name" {
+  default = "my_function"
+  description = "lambda function name"
+  type = string
+}
+
+variable "handler" {
+  default = "lambda.lambda_handler"
+  description = "Lambda function handler"
+  type = string
+}
+
+variable "runtime" {
+  default = "python3.7"
+  description = "Lambda function runtime"
+  type = string
+}
+
+variable "statement_id" {
+  default = "AllowExecutionFromAPIGateway"
+  description = "IAM statement ID"
+}
+
+variable "action" {
+  default = "lambda:InvokeFunction"
+  description = "IAM Lambda Description"
+}
+
+variable "principal" {
+  default = "apigateway.amazonaws.com"
+  description = "IAM Lambda Principal"
+}
+
+# API Gateway
+
+variable "api_name" {
+  default = "myapi"
+  description = "API Name"
+  type =  string
+}
+
+variable "api_path_part" {
+  default = "resource"
+  description = "value"
+  type = string
+}
+
+variable "api_http_method" {
+  default = "GET"
+  description = "Api gateway method"
+  type = string
+}
+
+variable "api_authorization" {
+  default = "NONE"
+  description = "API Gateway Authorization"
+  type =  string
+}
+
+variable "api_integration_http_method" {
+  default = "POST"
+  description = "API HTTP method integration"
+}
+
+variable "api_type" {
+  default = "AWS_PROXY"
+  description = "API GW Integration type"
+}
