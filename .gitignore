@@ -5,4 +5,5 @@ terraform.tfstate.backup
 .terraform.tfstate.lock.info
 lambda.py
 demo.tfvars
-./git_upload.sh
+git_upload.sh
+.gitignore
