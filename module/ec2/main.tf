@@ -1,8 +1,8 @@
 locals {
-  user_data = <<-EOF
+  user_data = <<-EOT
   #!/bin/bash
   echo "Hello Terraform!"
-  EOF
+  EOT
 }
 
 resource "aws_key_pair" "auth" {
