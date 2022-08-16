@@ -6,4 +6,3 @@ terraform.tfstate.backup
 lambda.py
 demo.tfvars
 git_upload.sh
-.gitignore
