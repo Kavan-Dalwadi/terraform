@@ -9,6 +9,8 @@ variable "env" {
     default = "prod"
 }
 
+#-----------------------------------VPC--------------------------------------#
+
 variable "vpc_cidr" {
   description = "VPC CIDR.."
   type = string
@@ -37,6 +39,8 @@ variable "az_2" {
   description = "Your Az2, use AWS CLI to find your account specific"
 }
 
+#------------------------------------EC2-----------------------------------------#
+
 variable "public_key_path" {
   description = "SSh public key path"
   default = "~/.ssh/tf_aws_keypair.pub"
@@ -60,6 +64,7 @@ variable "aws_amis" {
   }
 }
 
+#--------------------------------------RDS----------------------------------------#
 
 variable "allocated_storage" {
   default = 40
@@ -93,6 +98,7 @@ variable "password" {
   description = "password, provide through your ENV variables"
 }
 
+#________________________________________EKS__________________________________________________#
 variable "cluster_config" {
   type = object({
     name    = string
@@ -103,6 +109,8 @@ variable "cluster_config" {
     version = "1.22"
   }
 }
+
+#----------------------------------RDS-Cluster--------------------------#
 
 variable "rds_cluster_name" {
   default     = "auroraMySQL"
