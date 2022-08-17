@@ -64,6 +64,11 @@ variable "aws_amis" {
   }
 }
 
+variable "user_data_file" {
+  type = string
+  default = "script.sh"
+}
+
 #--------------------------------------RDS----------------------------------------#
 
 variable "allocated_storage" {

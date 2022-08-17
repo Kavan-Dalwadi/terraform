@@ -1,6 +1,6 @@
 resource "aws_vpc" "default" {
     cidr_block = var.vpc_cidr
-
+    enable_dns_hostnames = true
     tags = {
       "Name" = "${var.env}-tf-vpc"
     }
@@ -50,14 +50,14 @@ resource "aws_eip" "default" {
     }
  }
 
-resource "aws_nat_gateway" "default" {
-  allocation_id = aws_eip.default.id
-  subnet_id = aws_subnet.public.id
+# resource "aws_nat_gateway" "default" {
+#   allocation_id = aws_eip.default.id
+#   subnet_id = aws_subnet.public.id
   
-    tags = {
-      "Name" = "${var.env}-tf-NAT-Gateway"
-    }
-}
+#     tags = {
+#       "Name" = "${var.env}-tf-NAT-Gateway"
+#     }
+# }
 
 resource "aws_security_group" "default_ec2" {
     name        = "${var.env}-tf-ec2"

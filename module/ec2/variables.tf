@@ -13,6 +13,10 @@ variable "instance_type" {
   type = string
 }
 
+variable "user_data_file" {
+  type = string
+}
+
 variable "public_key_path" {
     type = string
     description = "ec2 public key path"

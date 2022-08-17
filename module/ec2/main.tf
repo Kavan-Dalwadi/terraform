@@ -1,9 +1,4 @@
-locals {
-  user_data = <<-EOT
-  #!/bin/bash
-  echo "Hello Terraform!"
-  EOT
-}
+locals {}
 
 resource "aws_key_pair" "auth" {
     key_name   = var.key_name
@@ -18,7 +13,14 @@ resource "aws_instance" "web" {
     vpc_security_group_ids = [var.ec2_security_group_id]
     subnet_id              = var.vpc_subnet_id
 
-    user_data_base64       = base64encode(local.user_data)
+    #user_data = "${file("${var.user_data_file}")}"
+
+    user_data = <<EOF
+#!/bin/bash
+sudo apt upgrade && sudo apt update
+sudo apt install nginx -y
+touch ~/demo1
+EOF
 
     tags = {
       "Name" = "${var.env}-tf-server"
