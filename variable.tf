@@ -90,6 +90,7 @@ variable "username" {
 }
 
 variable "password" {
+  default = "kavan123"
   description = "password, provide through your ENV variables"
 }
 
@@ -138,4 +139,5 @@ variable "rds_cluster_username" {
 
 variable "rds_cluster_password" {
   description = "password, provide through your ENV variables"
+  default = "kavan123"
 }
