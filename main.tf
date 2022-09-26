@@ -13,31 +13,31 @@ provider "aws" {
   region = var.aws_region
 }
 
-module "vpc" {
-  source = "./module/vpc"
-  vpc_cidr = var.vpc_cidr
-  public_subnet_cidr = var.public_subnet_cidr
-  private_subnet_cidr = var.private_subnet_cidr
-  az_1 = var.az_1
-  az_2 = var.az_2
-  env = var.env
-}
+# module "vpc" {
+#   source = "./module/vpc"
+#   vpc_cidr = var.vpc_cidr
+#   public_subnet_cidr = var.public_subnet_cidr
+#   private_subnet_cidr = var.private_subnet_cidr
+#   az_1 = var.az_1
+#   az_2 = var.az_2
+#   env = var.env
+# }
 
-module "ec2" {
-  source = "./module/ec2"
-  public_key_path = var.public_key_path
-  key_name = var.key_name
-  instance_type = var.instance_type
-  env = var.env
-  ami = var.aws_amis[var.aws_region]
-  ec2_security_group_id = module.vpc.vpc_ec2_security_group_id
-  vpc_subnet_id = module.vpc.vpc_public_subnet_id
-  user_data_file = var.user_data_file
+# module "ec2" {
+#   source = "./module/ec2"
+#   public_key_path = var.public_key_path
+#   key_name = var.key_name
+#   instance_type = var.instance_type
+#   env = var.env
+#   ami = var.aws_amis[var.aws_region]
+#   ec2_security_group_id = module.vpc.vpc_ec2_security_group_id
+#   vpc_subnet_id = module.vpc.vpc_public_subnet_id
+#   user_data_file = var.user_data_file
   
-  depends_on = [
-    module.vpc
-  ]
-}
+#   depends_on = [
+#     module.vpc
+#   ]
+# }
 
 # module "elb" {
 #   source = "./module/elb"
@@ -81,12 +81,12 @@ module "ec2" {
 #   ]  
 # }
 
-# module "iam" {
-#   source = "./module/iam"
+module "iam" {
+  source = "github.com/Kavan-Dalwadi/terraform/"
 
-#   lambda_role_name = var.lambda_role_name
-#   #eks-role-policy = var.aws_iam_role_policy_attachment
-# }
+  lambda_role_name = var.lambda_role_name
+  #eks-role-policy = var.aws_iam_role_policy_attachment
+}
 
 # module "eks_cluster" {
 #   source = "./modules/eks_cluster"
@@ -128,16 +128,16 @@ module "ec2" {
 #   ]
 # }
 
-# module lambda{
-#    source = "./module/lambda"
+module lambda{
+   source = "github.com/Kavan-Dalwadi/terraform/"
 
-#     lambdaRole    = module.iam.lambdaRole
-#     filename      = var.filename
-#     function_name = var.function_name
-#     handler       = var.handler
-#     runtime       = var.runtime
+    lambdaRole    = module.iam.lambdaRole
+    filename      = var.filename
+    function_name = var.function_name
+    handler       = var.handler
+    runtime       = var.runtime
 
-#    depends_on = [
-#      module.iam
-#    ]
-# }
+  #  depends_on = [
+  #    module.iam
+  #  ]
+}

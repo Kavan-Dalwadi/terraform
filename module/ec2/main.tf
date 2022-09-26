@@ -26,9 +26,9 @@ EOF
       "Name" = "${var.env}-tf-server"
     }
 }
-
+        
 # resource "aws_ami_from_instance" "web" {
-#   name               = "web-ami"
+#   name       = "web-ami"
 #   source_instance_id = aws_instance.web.id
 
 #   tags = {
