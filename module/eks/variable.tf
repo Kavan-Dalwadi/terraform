@@ -2,7 +2,7 @@ variable "cluster_config" {
   
 }
 
-variable "role_arn" {
+variable "cluster_role_arn" {
   
 }
 

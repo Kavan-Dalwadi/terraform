@@ -21,10 +21,11 @@ resource "aws_iam_role" "EKSClusterRole" {
 #--------------------------------------------------
 resource "aws_iam_role" "NodeGroupRole" {
   name = "EKSNodeGroupRole"
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
+  assume_role_policy = jsonencode(
+    {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
         Action = "sts:AssumeRole"
         Effect = "Allow"
         Principal = {
@@ -32,7 +33,8 @@ resource "aws_iam_role" "NodeGroupRole" {
         }
       },
     ]
-  })
+}
+  )
 }
 
 #--------------------------------------------------
@@ -46,7 +48,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEKSClusterPolicy" {
 #--------------------------------------------------
 #          Policy Attach to NodeGroup
 #--------------------------------------------------
-resource "aws_iam_role_policy_attachment" "AmazonEKSWorkerNodePolicy" {
+resource "aws_iam_role_policy_attachment" "AWSServiceRoleForAmazonEKSNodegroup" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
   role       = aws_iam_role.NodeGroupRole.name
 }
@@ -55,7 +57,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEKSWorkerNodePolicy" {
 #  read-only access to Amazon EC2 Container Registry repositories
 #--------------------------------------------------
 resource "aws_iam_role_policy_attachment" "AmazonEC2ContainerRegistryReadOnly" {
-  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+  policy_arn = "arn:aws:iam::aws:policy/aws-service-role/AWSServiceRoleForAmazonEKSNodegroup"
   role       = aws_iam_role.NodeGroupRole.name
 }
 

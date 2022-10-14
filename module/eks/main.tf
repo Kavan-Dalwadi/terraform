@@ -1,6 +1,6 @@
 resource "aws_eks_cluster" "eks-cluster" {
   name     = var.cluster_config.name
-  role_arn = var.role_arn
+  role_arn = var.cluster_role_arn
   version  = var.cluster_config.version
 
   vpc_config {

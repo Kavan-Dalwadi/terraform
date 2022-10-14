@@ -93,6 +93,11 @@ variable "password" {
   description = "password, provide through your ENV variables"
 }
 
+variable "s3_bucket_name" {
+  type = string
+  default = "terraform-backup-18ce015"
+}
+
 variable "cluster_config" {
   type = object({
     name    = string

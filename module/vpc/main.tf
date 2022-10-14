@@ -1,3 +1,8 @@
+# This is data block which will give you value for My Public IP which you can set in security group using: data.http.ip.response_body
+data "http" "ip" {
+  url = "https://ifconfig.me/ip"
+}
+
 resource "aws_vpc" "default" {
     cidr_block = var.vpc_cidr
 
@@ -18,6 +23,7 @@ resource "aws_route" "internet_access" {
     route_table_id         = aws_vpc.default.main_route_table_id
     destination_cidr_block = "0.0.0.0/0"
     gateway_id             = aws_internet_gateway.default.id
+
 }
 
 resource "aws_subnet" "public" {
@@ -34,7 +40,7 @@ resource "aws_subnet" "public" {
 resource "aws_subnet" "private" {
     vpc_id                  = aws_vpc.default.id
     cidr_block              = var.private_subnet_cidr
-    map_public_ip_on_launch = false
+    map_public_ip_on_launch = true
     availability_zone = var.az_2
 
     tags = {
@@ -87,7 +93,7 @@ resource "aws_security_group" "default_ec2" {
     }
 
     tags = {
-      "Name" = "${var.env}-tf-sg"
+      "Name" = "${var.env}-tf-ec2-sg"
     }
 }
 
@@ -113,6 +119,6 @@ resource "aws_security_group" "default_rds" {
     }
 
     tags = {
-      "Name" = "${var.env}-tf-sg"
+      "Name" = "${var.env}-tf-rds-sg"
     }
 }
