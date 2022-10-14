@@ -82,7 +82,7 @@ provider "aws" {
 # }
 
 module "iam" {
-  source = "github.com/Kavan-Dalwadi/terraform/"
+  source = "./module/iam"
 
   lambda_role_name = var.lambda_role_name
   #eks-role-policy = var.aws_iam_role_policy_attachment
@@ -129,7 +129,7 @@ module "iam" {
 # }
 
 module lambda{
-   source = "github.com/Kavan-Dalwadi/terraform/"
+   source = "./module/lambda"
 
     lambdaRole    = module.iam.lambdaRole
     filename      = var.filename
@@ -137,7 +137,7 @@ module lambda{
     handler       = var.handler
     runtime       = var.runtime
 
-  #  depends_on = [
-  #    module.iam
-  #  ]
+   depends_on = [
+     module.iam
+   ]
 }
