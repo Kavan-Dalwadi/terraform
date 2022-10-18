@@ -48,7 +48,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEKSClusterPolicy" {
 #--------------------------------------------------
 #          Policy Attach to NodeGroup
 #--------------------------------------------------
-resource "aws_iam_role_policy_attachment" "AWSServiceRoleForAmazonEKSNodegroup" {
+resource "aws_iam_role_policy_attachment" "AmazonEKSWorkerNodePolicy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
   role       = aws_iam_role.NodeGroupRole.name
 }
@@ -57,7 +57,7 @@ resource "aws_iam_role_policy_attachment" "AWSServiceRoleForAmazonEKSNodegroup" 
 #  read-only access to Amazon EC2 Container Registry repositories
 #--------------------------------------------------
 resource "aws_iam_role_policy_attachment" "AmazonEC2ContainerRegistryReadOnly" {
-  policy_arn = "arn:aws:iam::aws:policy/aws-service-role/AWSServiceRoleForAmazonEKSNodegroup"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
   role       = aws_iam_role.NodeGroupRole.name
 }
 

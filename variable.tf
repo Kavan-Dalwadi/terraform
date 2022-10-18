@@ -1,57 +1,79 @@
 variable "aws_region" {
   description = "AWS default region."
-  type =  string
-  default     = "ap-south-1"
+  type        = string
+  default     = "us-east-1"
 }
 
 variable "env" {
-    description = "Project environment.. "
-    default = "prod"
+  description = "Project environment.. "
+  default     = "prod"
 }
 
 variable "vpc_cidr" {
   description = "VPC CIDR.."
-  type = string
-  default = "114.0.0.0/16"
+  type        = string
+  default     = "10.0.0.0/16"
 }
 
 variable "public_subnet_cidr" {
   description = "VPC Subnet A  CIDR"
-  type = string
-  default = "114.0.16.0/24"
+  type        = string
+  default     = "10.0.1.0/24"
+}
+
+variable "private_b_subnet_cidr" {
+  description = "VPC Subnet A  CIDR"
+  type        = string
+  default     = "10.0.3.0/24"
+}
+
+variable "public_b_subnet_cidr" {
+  description = "VPC Subnet A  CIDR"
+  type        = string
+  default     = "10.0.2.0/24"
 }
 
 variable "private_subnet_cidr" {
   description = "VPC Subnet B  CIDR"
-  type = string
-  default = "114.0.0.0/24"
-} 
+  type        = string
+  default     = "10.0.4.0/24"
+}
 
 variable "az_1" {
-  default     = "ap-south-1b"
+  default     = "us-east-1a"
   description = "Your Az1, use AWS CLI to find your account specific"
 }
 
 variable "az_2" {
-  default     = "ap-south-1c"
+  default     = "us-east-1c"
+  description = "Your Az2, use AWS CLI to find your account specific"
+}
+
+variable "az_3" {
+  default     = "us-east-1b"
+  description = "Your Az1, use AWS CLI to find your account specific"
+}
+
+variable "az_4" {
+  default     = "us-east-1d"
   description = "Your Az2, use AWS CLI to find your account specific"
 }
 
 variable "public_key_path" {
   description = "SSh public key path"
-  default = "~/.ssh/tf_aws_keypair.pub"
+  default     = "~/.ssh/tf_aws_keypair.pub"
 }
 
 variable "instance_type" {
   description = "AWS EC2 instance type"
-  type = string
-  default = "t2.micro"
+  type        = string
+  default     = "t2.micro"
 }
 
 variable "key_name" {
   description = "Desired name of AWS key pair"
-  type = string
-  default = "tf_aws_keypair"
+  type        = string
+  default     = "tf_aws_keypair"
 }
 
 variable "aws_amis" {
@@ -62,8 +84,8 @@ variable "aws_amis" {
 
 
 variable "allocated_storage" {
-  default = 40
-  type = number
+  default     = 40
+  type        = number
   description = "Storage size in GB"
 }
 
@@ -74,8 +96,8 @@ variable "engine" {
 
 variable "engine_version" {
   description = "Engine version"
-  default = "5.7.12"
-  type = string
+  default     = "5.7.12"
+  type        = string
 }
 
 variable "instance_class" {
@@ -89,12 +111,12 @@ variable "username" {
   description = "User name"
 }
 
-variable "password" {
-  description = "password, provide through your ENV variables"
-}
+# variable "password" {
+#   description = "password, provide through your ENV variables"
+# }
 
 variable "s3_bucket_name" {
-  type = string
+  type    = string
   default = "terraform-backup-18ce015"
 }
 
@@ -105,8 +127,23 @@ variable "cluster_config" {
   })
   default = {
     name    = "eks-cluster"
-    version = "1.22"
+    version = "1.23"
   }
+}
+
+variable "eks_ami_id" {
+  type    = string
+  default = "ami-0149b2da6ceec4bb0"
+}
+
+variable "eks_instance_type" {
+  type    = string
+  default = "t3.micro"
+}
+
+variable "eks_disk_size" {
+  type    = number
+  default = 10
 }
 
 variable "rds_cluster_name" {
@@ -126,8 +163,8 @@ variable "rds_cluster_engine" {
 
 variable "rds_cluster_engine_version" {
   description = "Engine version"
-  default = "5.7.mysql_aurora.2.10.2"
-  type = string
+  default     = "5.7.mysql_aurora.2.10.2"
+  type        = string
 }
 
 variable "rds_cluster_instance_class" {
@@ -141,6 +178,6 @@ variable "rds_cluster_username" {
   description = "User name"
 }
 
-variable "rds_cluster_password" {
-  description = "password, provide through your ENV variables"
-}
+# variable "rds_cluster_password" {
+#   description = "password, provide through your ENV variables"
+# }
