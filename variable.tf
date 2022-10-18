@@ -31,15 +31,15 @@ variable "public_b_subnet_cidr" {
   description = "VPC Subnet A  CIDR"
   type        = string
   default     = "10.0.2.0/24"
-}
+} 
 
 variable "private_subnet_cidr" {
-  description = "VPC Subnet B  CIDR"
+  description = "VPC Subnet B  CIDR"  
   type        = string
   default     = "10.0.4.0/24"
 }
 
-variable "az_1" {
+  variable "az_1" {
   default     = "us-east-1a"
   description = "Your Az1, use AWS CLI to find your account specific"
 }
@@ -144,6 +144,11 @@ variable "eks_instance_type" {
 variable "eks_disk_size" {
   type    = number
   default = 10
+}
+
+variable "eks_volume_type" {
+  default = "gp2"
+  type = string
 }
 
 variable "rds_cluster_name" {

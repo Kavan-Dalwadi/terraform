@@ -18,6 +18,8 @@ variable "eks_ami_id" {}
 
 variable "eks_disk_size" {}
 
-variable "env"{}
+variable "env" {}
 
 variable "eks_instance_type" {}
+
+variable "eks_volume_type" {}

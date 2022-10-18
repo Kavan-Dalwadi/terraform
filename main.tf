@@ -1,6 +1,6 @@
 terraform {
   required_version = ">= 0.12"
-    required_providers {
+  required_providers {
     aws = {
       source  = "hashicorp/aws"
       version = "~> 4.0"
@@ -50,14 +50,15 @@ module "eks" {
   eks_ami_id        = var.eks_ami_id
   eks_instance_type = var.eks_instance_type
   eks_disk_size     = var.eks_disk_size
-
+  eks_volume_type   = var.eks_volume_type
+  
   private_subnet_id   = module.vpc.vpc_private_subnet_id
   private_b_subnet_id = module.vpc.vpc_private_b_subnet_id
 
-  public_subnet_id    = module.vpc.vpc_public_subnet_id
-  public_b_subnet_id  = module.vpc.vpc_private_b_subnet_id
+  public_subnet_id   = module.vpc.vpc_public_subnet_id
+  public_b_subnet_id = module.vpc.vpc_private_b_subnet_id
 
-  security_group_id  = module.vpc.vpc_ec2_security_group_id
+  security_group_id = module.vpc.vpc_ec2_security_group_id
 }
 
 # module "ec2" {
