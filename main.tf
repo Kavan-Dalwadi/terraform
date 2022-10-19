@@ -45,20 +45,21 @@ module "eks" {
   cluster_role_arn = module.iam.EKSClusterRole
   node_role_arn    = module.iam.NodeGroupRole
 
-  env = var.env
+  env             = var.env
+  public_key_path = var.public_key_path
+  key_name        = var.key_name
 
-  eks_ami_id        = var.eks_ami_id
-  eks_instance_type = var.eks_instance_type
-  eks_disk_size     = var.eks_disk_size
-  eks_volume_type   = var.eks_volume_type
-  
+  eks_ami_id         = var.eks_ami_id
+  eks_instance_type  = var.eks_instance_type
+  eks_disk_size      = var.eks_disk_size
+  eks_volume_type    = var.eks_volume_type
+  node_capacity_type = var.node_capacity_type
+
   private_subnet_id   = module.vpc.vpc_private_subnet_id
   private_b_subnet_id = module.vpc.vpc_private_b_subnet_id
-
-  public_subnet_id   = module.vpc.vpc_public_subnet_id
-  public_b_subnet_id = module.vpc.vpc_private_b_subnet_id
-
-  security_group_id = module.vpc.vpc_ec2_security_group_id
+  public_subnet_id    = module.vpc.vpc_public_subnet_id
+  public_b_subnet_id  = module.vpc.vpc_private_b_subnet_id
+  security_group_id   = module.vpc.vpc_ec2_security_group_id
 }
 
 # module "ec2" {

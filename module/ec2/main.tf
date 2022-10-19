@@ -12,7 +12,7 @@ resource "aws_instance" "web" {
     subnet_id = var.vpc_subnet_id
 
     tags = {
-      "Name" = "${var.env}-tf-server"
+      "Name" = "${var.env}-server"
     }
 }
 
@@ -21,6 +21,6 @@ resource "aws_instance" "web" {
 #   source_instance_id = aws_instance.web.id
 
 #   tags = {
-#       "Name" = "${var.env}-tf-ami"
+#       "Name" = "${var.env}-ami"
 #     }
 # }

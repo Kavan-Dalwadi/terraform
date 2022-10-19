@@ -126,7 +126,7 @@ variable "cluster_config" {
     version = string
   })
   default = {
-    name    = "eks-cluster"
+    name    = "eks-funfull"
     version = "1.23"
   }
 }
@@ -149,6 +149,11 @@ variable "eks_disk_size" {
 variable "eks_volume_type" {
   default = "gp2"
   type = string
+}
+
+variable "node_capacity_type" {
+  type = string
+  default = "ON_DEMAND"
 }
 
 variable "rds_cluster_name" {

@@ -8,14 +8,14 @@ resource "aws_vpc" "default" {
   enable_dns_hostnames  = true
 
   tags = {
-    "Name" = "${var.env}-tf-vpc"
+    "Name" = "${var.env}-vpc"
   }
 }
 
 resource "aws_internet_gateway" "default" {
 vpc_id = aws_vpc.default.id
   tags = {
-    "Name" = "${var.env}-tf-ig"
+    "Name" = "${var.env}-ig"
   }
 }
 
@@ -27,7 +27,7 @@ resource "aws_subnet" "public" {
   availability_zone       = var.az_1
 
   tags = {
-    "Name"                                          = "${var.env}-tf-public-subnet-a"
+    "Name"                                          = "${var.env}-public-subnet-a"
     "kubernetes.io/cluster/${var.eks_cluster_name}" = "owned"
   }
 }
@@ -53,7 +53,7 @@ resource "aws_subnet" "public_b" {
   availability_zone       = var.az_3
 
   tags = {
-    "Name"                                          = "${var.env}-tf-public-subnet-b"
+    "Name"                                          = "${var.env}-public-subnet-b"
     "kubernetes.io/cluster/${var.eks_cluster_name}" = "owned"
   }
 }
@@ -79,7 +79,7 @@ resource "aws_subnet" "private_b" {
   availability_zone = var.az_4
 
   tags = {
-    "Name"                                          = "${var.env}-tf-private-subnet-b"
+    "Name"                                          = "${var.env}-private-subnet-b"
     "kubernetes.io/cluster/${var.eks_cluster_name}" = "owned"
   }
 }
@@ -92,7 +92,7 @@ resource "aws_subnet" "private" {
   availability_zone = var.az_2
 
   tags = {
-    "Name"                                          = "${var.env}-tf-private-subnet-a"
+    "Name"                                          = "${var.env}-private-subnet-a"
     "kubernetes.io/cluster/${var.eks_cluster_name}" = "owned"
   }
 }
@@ -112,7 +112,7 @@ resource "aws_eip" "default" {
   vpc = true
 
   tags = {
-    "Name" = "${var.env}-tf-ElasticIP"
+    "Name" = "${var.env}-ElasticIP"
   }
 }
 
@@ -121,12 +121,12 @@ resource "aws_nat_gateway" "default" {
   subnet_id     = aws_subnet.public.id
 
   tags = {
-    "Name" = "${var.env}-tf-NAT-Gateway"
+    "Name" = "${var.env}-NAT-Gateway"
   }
 }
 
 resource "aws_security_group" "default_ec2" {
-  name        = "${var.env}-tf-ec2"
+  name        = "${var.env}-ec2"
   description = "Used in the terraform"
   vpc_id      = aws_vpc.default.id
 
@@ -146,13 +146,13 @@ resource "aws_security_group" "default_ec2" {
   }
 
   tags = {
-    "Name" = "${var.env}-tf-ec2-sg"
+    "Name" = "${var.env}-ec2-sg"
   }
 }
 
 
 # resource "aws_security_group" "default_rds" {
-#     name        = "${var.env}-tf-rds"
+#     name        = "${var.env}-rds"
 #     description = "Used in the terraform"
 #     vpc_id      = aws_vpc.default.id
 
@@ -172,6 +172,6 @@ resource "aws_security_group" "default_ec2" {
 #     }
 
 #     tags = {
-#       "Name" = "${var.env}-tf-rds-sg"
+#       "Name" = "${var.env}-rds-sg"
 #     }
 # }

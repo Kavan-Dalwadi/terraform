@@ -23,3 +23,9 @@ variable "env" {}
 variable "eks_instance_type" {}
 
 variable "eks_volume_type" {}
+
+variable "node_capacity_type" {}
+
+variable "key_name" {}
+
+variable "public_key_path" {}
