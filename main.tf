@@ -20,7 +20,7 @@ provider "aws" {
 }
 
 module "vpc" {
-  source                = "./module/vpc"
+  source                = "github.com/Kavan-Dalwadi/terraform/module/vpc"
   vpc_cidr              = var.vpc_cidr
   public_subnet_cidr    = var.public_subnet_cidr
   public_b_subnet_cidr  = var.public_b_subnet_cidr
@@ -34,33 +34,33 @@ module "vpc" {
   eks_cluster_name      = var.cluster_config.name
 }
 
-module "iam" {
-  source = "./module/iam"
-  #eks-role-policy = var.aws_iam_role_policy_attachment
-}
+# module "iam" {
+#   source = "./module/iam"
+#   #eks-role-policy = var.aws_iam_role_policy_attachment
+# }
 
-module "eks" {
-  source           = "./module/eks"
-  cluster_config   = var.cluster_config
-  cluster_role_arn = module.iam.EKSClusterRole
-  node_role_arn    = module.iam.NodeGroupRole
+# module "eks" {
+#   source           = "./module/eks"
+#   cluster_config   = var.cluster_config
+#   cluster_role_arn = module.iam.EKSClusterRole
+#   node_role_arn    = module.iam.NodeGroupRole
 
-  env             = var.env
-  public_key_path = var.public_key_path
-  key_name        = var.key_name
+#   env             = var.env
+#   public_key_path = var.public_key_path
+#   key_name        = var.key_name
 
-  eks_ami_id         = var.eks_ami_id
-  eks_instance_type  = var.eks_instance_type
-  eks_disk_size      = var.eks_disk_size
-  eks_volume_type    = var.eks_volume_type
-  node_capacity_type = var.node_capacity_type
+#   eks_ami_id         = var.eks_ami_id
+#   eks_instance_type  = var.eks_instance_type
+#   eks_disk_size      = var.eks_disk_size
+#   eks_volume_type    = var.eks_volume_type
+#   node_capacity_type = var.node_capacity_type
 
-  private_subnet_id   = module.vpc.vpc_private_subnet_id
-  private_b_subnet_id = module.vpc.vpc_private_b_subnet_id
-  public_subnet_id    = module.vpc.vpc_public_subnet_id
-  public_b_subnet_id  = module.vpc.vpc_private_b_subnet_id
-  security_group_id   = module.vpc.vpc_ec2_security_group_id
-}
+#   private_subnet_id   = module.vpc.vpc_private_subnet_id
+#   private_b_subnet_id = module.vpc.vpc_private_b_subnet_id
+#   public_subnet_id    = module.vpc.vpc_public_subnet_id
+#   public_b_subnet_id  = module.vpc.vpc_private_b_subnet_id
+#   security_group_id   = module.vpc.vpc_ec2_security_group_id
+# }
 
 # module "ec2" {
 #   source = "./module/ec2"
