@@ -1,4 +1,4 @@
-# Terraform Workspaces
+# Terraform
 
 ## Terraform workspace
 Workspace are alternative to reuseable-modules created in terraform. Your terraform state files will be saved in different workspaces.
