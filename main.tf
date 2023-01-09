@@ -16,23 +16,31 @@ terraform {
 }
 
 provider "aws" {
-  region = var.aws_region
+  region     = var.aws_region
+  access_key = "AKIA3YTMYBO3BACCPUM5"
+  secret_key = "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"
 }
 
-module "vpc" {
-  source                = "github.com/Kavan-Dalwadi/terraform/module/vpc"
-  vpc_cidr              = var.vpc_cidr
-  public_subnet_cidr    = var.public_subnet_cidr
-  public_b_subnet_cidr  = var.public_b_subnet_cidr
-  private_b_subnet_cidr = var.private_b_subnet_cidr
-  private_subnet_cidr   = var.private_subnet_cidr
-  az_1                  = var.az_1
-  az_2                  = var.az_2
-  az_3                  = var.az_3
-  az_4                  = var.az_4
-  env                   = var.env
-  eks_cluster_name      = var.cluster_config.name
+module "s3" {
+  source         = "./module/s3"
+  s3_bucket_name = var.s3_bucket_name
+  env            = var.env
 }
+
+# module "vpc" {
+#   source                = "github.com/Kavan-Dalwadi/terraform/module/vpc"
+#   vpc_cidr              = var.vpc_cidr
+#   public_subnet_cidr    = var.public_subnet_cidr
+#   public_b_subnet_cidr  = var.public_b_subnet_cidr
+#   private_b_subnet_cidr = var.private_b_subnet_cidr
+#   private_subnet_cidr   = var.private_subnet_cidr
+#   az_1                  = var.az_1
+#   az_2                  = var.az_2
+#   az_3                  = var.az_3
+#   az_4                  = var.az_4
+#   env                   = var.env
+#   eks_cluster_name      = var.cluster_config.name
+# }
 
 # module "iam" {
 #   source = "./module/iam"

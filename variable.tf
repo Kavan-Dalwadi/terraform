@@ -117,7 +117,7 @@ variable "username" {
 
 variable "s3_bucket_name" {
   type    = string
-  default = "terraform-backup-18ce015"
+  default = "terraform-demo-18ce015"
 }
 
 variable "cluster_config" {
