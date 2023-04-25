@@ -14,14 +14,46 @@ provider "aws" {
 }
 
 module "vpc" {
-  source = "./module/vpc"
-  vpc_cidr = var.vpc_cidr
-  public_subnet_cidr = var.public_subnet_cidr
-  private_subnet_cidr = var.private_subnet_cidr
-  az_1 = var.az_1
-  az_2 = var.az_2
-  env = var.env
+  source                = "./module/vpc"
+  vpc_cidr              = var.vpc_cidr
+  public_subnet_cidr    = var.public_subnet_cidr
+  public_b_subnet_cidr  = var.public_b_subnet_cidr
+  private_b_subnet_cidr = var.private_b_subnet_cidr
+  private_subnet_cidr   = var.private_subnet_cidr
+  avability_zone_1      = var.avability_zone_1
+  avability_zone_2      = var.avability_zone_2
+  avability_zone_3      = var.avability_zone_3
+  avability_zone_4      = var.avability_zone_4
+  env                   = var.env
+  eks_cluster_name      = var.cluster_config.name
 }
+
+module "iam" {
+  source = "./module/iam"
+}
+
+module "eks" {
+  source           = "./module/eks"
+  cluster_config   = var.cluster_config
+  cluster_role_arn = module.iam.EKSClusterRole
+  node_role_arn    = module.iam.NodeGroupRole
+
+  env               = var.env
+  eks_node_key_name = var.eks_node_key_name
+
+  # eks_ami_id         = var.eks_ami_id
+  eks_instance_type  = var.eks_instance_type
+  eks_disk_size      = var.eks_disk_size
+  eks_volume_type    = var.eks_volume_type
+  node_capacity_type = var.node_capacity_type
+
+  private_subnet_id   = module.vpc.vpc_private_subnet_id
+  private_b_subnet_id = module.vpc.vpc_private_b_subnet_id
+  public_subnet_id    = module.vpc.vpc_public_subnet_id
+  public_b_subnet_id  = module.vpc.vpc_public_b_subnet_id
+  security_group_id   = module.vpc.vpc_ec2_security_group_id
+}
+
 
 # module "ec2" {
 #   source = "./module/ec2"
@@ -52,49 +84,30 @@ module "vpc" {
 #   ]
 # }
 
-module "rds" {
-  source = "./module/rds"
+# module "rds" {
+#   source = "./module/rds"
 
-  env = var.env
-  allocated_storage      = var.allocated_storage
-  engine                 = var.engine
-  engine_version         = var.engine_version
-  instance_class         = var.instance_class
-  username               = var.username
-  password               = var.password
+#   env = var.env
+#   allocated_storage      = var.allocated_storage
+#   engine                 = var.engine
+#   engine_version         = var.engine_version
+#   instance_class         = var.instance_class
+#   username               = var.username
+#   password               = var.password
 
-  rds_security_group_id = module.vpc.vpc_rds_security_group_id
-  vpc_subnet_id = module.vpc.vpc_public_subnet_id
-  vpc_subnet_two_id = module.vpc.vpc_private_subnet_id
+#   rds_security_group_id = module.vpc.vpc_rds_security_group_id
+#   vpc_subnet_id = module.vpc.vpc_public_subnet_id
+#   vpc_subnet_two_id = module.vpc.vpc_private_subnet_id
 
-  rds_cluster_name = var.rds_cluster_name
-  rds_cluster_engine = var.rds_cluster_engine
-  rds_cluster_engine_version = var.rds_cluster_engine_version
-  rds_cluster_instance_class = var.rds_cluster_instance_class
-  rds_cluster_identifier = var.rds_cluster_identifier
-  rds_cluster_username = var.rds_cluster_username
-  rds_cluster_password = var.rds_cluster_password
-
-  depends_on = [
-    module.vpc
-  ]  
-}
-
-# module "iam" {
-#   source = "./modules/iam"
-#   #eks-role-policy = var.aws_iam_role_policy_attachment
-# }
-
-# module "eks_cluster" {
-#   source = "./modules/eks_cluster"
-#   cluster_config = var.cluster_config
-#   role_arn = module.iam.EKSClusterRole
-#   public_subnets_id = module.vpc.vpc_public_subnet_id
-#   private_subnets_id = module.vpc.vpc_private_subnet_id
-#   security_group_id = module.vpc.vpc_ec2_security_group_id
-#   node_role_arn = module.iam.NodeGroupRole
+#   rds_cluster_name = var.rds_cluster_name
+#   rds_cluster_engine = var.rds_cluster_engine
+#   rds_cluster_engine_version = var.rds_cluster_engine_version
+#   rds_cluster_instance_class = var.rds_cluster_instance_class
+#   rds_cluster_identifier = var.rds_cluster_identifier
+#   rds_cluster_username = var.rds_cluster_username
+#   rds_cluster_password = var.rds_cluster_password
 
 #   depends_on = [
-#     module.vpc 
-#   ]
+#     module.vpc
+#   ]  
 # }

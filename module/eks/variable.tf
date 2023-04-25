@@ -1,23 +1,29 @@
-variable "cluster_config" {
-  
-}
+variable "cluster_config" {}
 
-variable "role_arn" {
-  
-}
+variable "cluster_role_arn" {}
 
-variable "public_subnets_id" {
-  
-}
+variable "private_subnet_id" {}
 
-variable "private_subnets_id" {
-  
-}
+variable "private_b_subnet_id" {}
 
-variable "security_group_id" {
-  
-}
+variable "public_subnet_id" {}
 
-variable "node_role_arn" {
-  
-}
+variable "public_b_subnet_id" {}
+
+variable "security_group_id" {}
+
+variable "node_role_arn" {}
+
+#variable "eks_ami_id" {}
+
+variable "eks_disk_size" {}
+
+variable "env" {}
+
+variable "eks_instance_type" {}
+
+variable "eks_volume_type" {}
+
+variable "node_capacity_type" {}
+
+variable "eks_node_key_name" {}

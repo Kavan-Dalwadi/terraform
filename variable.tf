@@ -11,31 +11,94 @@ variable "env" {
 
 variable "vpc_cidr" {
   description = "VPC CIDR.."
-  type = string
-  default = "114.0.0.0/16"
+  type        = string
+  default     = "10.0.0.0/16"
 }
 
 variable "public_subnet_cidr" {
-  description = "VPC Subnet A  CIDR"
-  type = string
-  default = "114.0.16.0/24"
+  description = "VPC Public Subnet A  CIDR"
+  type        = string
+  default     = "10.0.1.0/24"
+}
+
+variable "private_b_subnet_cidr" {
+  description = "VPC Private Subnet B  CIDR"
+  type        = string
+  default     = "10.0.3.0/24"
+}
+
+variable "public_b_subnet_cidr" {
+  description = "VPC Public Subnet B  CIDR"
+  type        = string
+  default     = "10.0.2.0/24"
 }
 
 variable "private_subnet_cidr" {
-  description = "VPC Subnet B  CIDR"
-  type = string
-  default = "114.0.0.0/24"
-} 
+  description = "VPC Private Subnet A  CIDR"
+  type        = string
+  default     = "10.0.4.0/24"
+}
 
-variable "az_1" {
-  default     = "ap-south-1b"
+variable "avability_zone_1" {
+  default     = "us-east-1a"
+  type        = string
   description = "Your Az1, use AWS CLI to find your account specific"
 }
 
-variable "az_2" {
-  default     = "ap-south-1c"
+variable "avability_zone_2" {
+  default     = "us-east-1c"
+  type        = string
   description = "Your Az2, use AWS CLI to find your account specific"
 }
+
+variable "avability_zone_3" {
+  default     = "us-east-1b"
+  type        = string
+  description = "Your Az1, use AWS CLI to find your account specific"
+}
+
+variable "avability_zone_4" {
+  default     = "us-east-1d"
+  type        = string
+  description = "Your Az2, use AWS CLI to find your account specific"
+}
+
+variable "eks_node_key_name" {
+  default = "dev-stage-funfull"
+  type    = string
+}
+
+variable "cluster_config" {
+  type = object({
+    name    = string
+    version = string
+  })
+  default = {
+    name    = "eks-funfull"
+    version = "1.24"
+  }
+}
+
+variable "eks_instance_type" {
+  type    = string
+  default = "t3.micro"
+}
+
+variable "eks_disk_size" {
+  type    = number
+  default = 40
+}
+
+variable "eks_volume_type" {
+  default = "gp2"
+  type    = string
+}
+
+variable "node_capacity_type" {
+  type    = string
+  default = "ON_DEMAND"
+}
+
 
 variable "public_key_path" {
   description = "SSh public key path"
@@ -94,16 +157,6 @@ variable "password" {
   description = "password, provide through your ENV variables"
 }
 
-variable "cluster_config" {
-  type = object({
-    name    = string
-    version = string
-  })
-  default = {
-    name    = "eks-cluster"
-    version = "1.22"
-  }
-}
 
 variable "rds_cluster_name" {
   default     = "auroraMySQL"
