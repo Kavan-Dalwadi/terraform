@@ -13,7 +13,3 @@
 # output "db_instance_address" {
 #   value = module.rds.db_instance_address
 # }
-
-output "eks_endpoint" {
-  value = module.eks.eks_endpoint
-}
